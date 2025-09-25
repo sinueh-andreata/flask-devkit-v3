@@ -22,6 +22,10 @@ def create_app(config_class=ConfigDev):
     # inicializa o modulo de autenticação
     init_auth(app)
 
+    # Cria todas as tabelas do banco de dados automaticamente
+    with app.app_context():
+        db.create_all()
+
     @app.route("/")
     def index():
         return "Hello World!"
