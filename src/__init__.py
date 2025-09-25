@@ -3,7 +3,8 @@ from .config import ConfigDev
 from .extensions import db, csrf, limiter, security
 from .models.models import User, Role
 from flask_security import SQLAlchemyUserDatastore
-from auth.datastore import user_datastore  
+from src.auth.datastore import user_datastore  
+from src.auth import init_app as init_auth
 
 def create_app(config_class=ConfigDev):
     app = Flask(__name__)
@@ -17,6 +18,9 @@ def create_app(config_class=ConfigDev):
 
     # configuração do Flask-Security
     security.init_app(app, user_datastore)
+
+    # inicializa o modulo de autenticação
+    init_auth(app)
 
     @app.route("/")
     def index():
