@@ -8,11 +8,6 @@ roles_users = db.Table('roles_users',
     db.Column('role_id', db.Integer(), db.ForeignKey('roles.id'))
 )
 
-role_admins = db.Table('role_admins',
-    db.Column('admin_id', db.Integer(), db.ForeignKey('admins.id')),
-    db.Column('role_id', db.Integer(), db.ForeignKey('roles.id'))
-) 
-
 class Role(db.Model, RoleMixin):
     __tablename__ = 'roles'
     id = db.Column(db.Integer(), primary_key=True)
@@ -30,18 +25,6 @@ class User(db.Model, UserMixin):
     fs_uniquifier = db.Column(db.String(255), unique=True, nullable=False, default=lambda: str(uuid.uuid4()))
 
     roles = db.relationship('Role', secondary=roles_users, backref=db.backref('users', lazy='dynamic'))
-
-class Admin(db.Model, UserMixin):
-    __tablename__ = 'admins'
-    id = db.Column(db.Integer(), primary_key=True)
-    email = db.Column(db.String(255), unique=True)
-    password = db.Column(db.String(255))
-    active = db.Column(db.Boolean())
-    confirmed_at = db.Column(db.DateTime())
-
-    fs_uniquifier = db.Column(db.String(255), unique=True, nullable=False, default=lambda: str(uuid.uuid4()))
-
-    roles = db.relationship('Role', secondary=role_admins, backref=db.backref('admins', lazy='dynamic'))
 
 class Produto(db.Model):
     __tablename__ = 'produtos'
