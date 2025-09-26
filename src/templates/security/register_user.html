@@ -1,14 +1,67 @@
+<h1>template de registro personalizado</h1>
+{% block content %}
+<div class="container">
+  <h2>Registrar</h2>
+
+  <form method="POST" action="{{ url_for_security('register') }}">
+    {{ register_user_form.hidden_tag() }}
+
+    <div class="form-group mb-3">
+      {{ register_user_form.email.label }}
+      {{ register_user_form.email(class="form-control") }}
+    </div>
+
+    <div class="form-group mb-3">
+      {{ register_user_form.password.label }}
+      {{ register_user_form.password(class="form-control") }}
+    </div>
+
+    <div class="form-group mb-3">
+      {{ register_user_form.password_confirm.label }}
+      {{ register_user_form.password_confirm(class="form-control") }}
+    </div>
+
+    <button type="submit" class="btn btn-success">Registrar</button>
+  </form>
+
+  <p class="mt-3">
+    <a href="{{ url_for_security('login') }}">Já tenho conta</a>
+  </p>
+</div>
+{% endblock %}
+
+
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Registro - Flask App</title>
+    <title>Registrar - Plataforma</title>
     <link rel="icon" href="/static/favicon.ico" type="image/x-icon">
 </head>
 <body>
-<h1>Registrar</h1>
-
-</form>
+<main>
+    <h1>Criar conta</h1>
+    <form id="register-form" method="post" action="/register" novalidate>
+        <label for="register-email">
+            E-mail
+            <input type="email" id="register-email" name="email" autocomplete="email" required>
+        </label>
+        <label for="register-password">
+            Senha
+            <input type="password" id="register-password" name="password" autocomplete="new-password" required>
+        </label>
+        <label for="register-password-confirm">
+            Confirmar senha
+            <input type="password" id="register-password-confirm" name="password_confirm" autocomplete="new-password" required>
+        </label>
+        <input type="hidden" name="next" id="register-next">
+        <button type="submit">Registrar</button>
+    </form>
+    <div class="links">
+        <span>Já tem conta? <a href="/login">Entrar</a></span>
+    </div>
+</main>
+<script src="/static/js/csrf.js" defer></script>
 </body>
 </html>
