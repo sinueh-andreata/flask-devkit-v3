@@ -1,4 +1,4 @@
-from flask import Flask
+from flask import Flask, render_template
 from .config import ConfigDev
 from .extensions import db, csrf, limiter, security
 from .models.models import User, Role
@@ -33,9 +33,17 @@ def create_app(config_class=ConfigDev):
     # Cria todas as tabelas do banco de dados automaticamente
     with app.app_context():
         db.create_all()
+    
+    @app.errorhandler(404)
+    def page_not_found(e):
+        return render_template('404.html'), 404
+
+    @app.errorhandler(500)
+    def internal_server_error(e):
+        return render_template('500.html'), 500
 
     @app.route("/")
     def index():
-        return "Hello World!"
-    
+        return render_template('index.html')
+
     return app
