@@ -3,20 +3,27 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Página Inicial</title>
-    <link rel="icon" href="/static/favicon.ico" type="image/x-icon">
+    <title>index</title>
 </head>
 <body>
-    <h1>Bem-vindo</h1>
+    <h1>registrar</h1>
 
-    <!-- Botões para login e registro -->
-    <button onclick="window.location.href='/entrar'">Login</button>
-    <button onclick="window.location.href='/cadastrar'">Registrar</button>
+    <form action="/register" method="post">
+        <input type="text" name="email" placeholder="Email" required>
+        <input type="password" name="password" placeholder="Password" required>
+        <input type="hidden" name="csrf_token" id="csrf_token_register">
+        <button type="submit">Register</button>
+    </form>
 
-    <!-- Alternativa usando links -->
-    <!--
-    <a href="/login"><button>Login</button></a>
-    <a href="/register"><button>Registrar</button></a>
-    -->
+    <h1>login</h1>
+    <form id="login-form" action="/login" method="post">
+        <input type="text" name="email" placeholder="Email" required>
+        <input type="password" name="password" placeholder="Password" required>
+        <input type="hidden" name="csrf_token" id="csrf_token_login">
+        <button type="submit">Login</button>
+    </form>
+
+    <button action="/register">?</button>
 </body>
+<script src="/static/js/csrf.js"></script>
 </html>

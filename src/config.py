@@ -19,6 +19,7 @@ class ConfigBase:
     SESSION_COOKIE_SAMESITE = 'Lax'
     SESSION_COOKIE_SECURE = True
     
+    # Configurações do Flask-Security
     SECURITY_REGISTERABLE = True
     SECURITY_CONFIRMABLE = False
     SECURITY_RECOVERABLE = True
@@ -26,6 +27,13 @@ class ConfigBase:
     SECURITY_EMAIL_SENDER = False
     SECURITY_SEND_PASSWORD_CHANGE_EMAIL = False
     
+    # URLs personalizadas
+    SECURITY_LOGIN_URL = '/login'
+    SECURITY_REGISTER_URL = '/register'
+    SECURITY_POST_LOGIN_REDIRECT_ENDPOINT = '/'
+    SECURITY_POST_REGISTER_REDIRECT_ENDPOINT = '/'
+    
+    # Templates personalizados
     SECURITY_LOGIN_USER_TEMPLATE = 'security/login.html'
     SECURITY_REGISTER_USER_TEMPLATE = 'security/register.html'
 

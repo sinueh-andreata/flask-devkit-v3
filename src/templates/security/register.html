@@ -8,13 +8,7 @@
 </head>
 <body>
 <h1>Registrar</h1>
-aaaaaaaaaa
-<form action="{{ url_for('security.register') }}" method="post">
-    {{ form.hidden_tag() }} <!-- CSRF e campos escondidos -->
-    <input type="text" name="email" placeholder="Email" value="{{ form.email.data }}">
-    <input type="password" name="password" placeholder="Password">
-    <input type="password" name="password_confirm" placeholder="Confirm Password">
-    <button type="submit">Register</button>
+
 </form>
 </body>
 </html>

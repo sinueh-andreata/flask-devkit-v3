@@ -13,16 +13,3 @@ def minha_rota():
         return jsonify({"message": "Acesso negado: você não tem a role necessária"}), 403
     return jsonify({"message": "Apenas usuários autenticados veem isso"})
 
-@usuarios_bp.route('/entrar', methods=['GET', 'POST'])
-def entrar():
-    form = LoginForm()
-    if form.validate_on_submit():
-        pass
-    return render_template('security/login.html', form=form)
-
-@usuarios_bp.route('/cadastrar', methods=['GET', 'POST'])
-def cadastrar():
-    form = RegisterForm()
-    if form.validate_on_submit():
-        pass
-    return render_template('security/register.html', form=form)
