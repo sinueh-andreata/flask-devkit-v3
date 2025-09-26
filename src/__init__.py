@@ -21,7 +21,10 @@ def create_app(config_class=ConfigDev):
     limiter.init_app(app)
 
     # configuração do Flask-Security
-    security.init_app(app, user_datastore)
+    security.init_app(app, user_datastore,
+                    register_form=None,
+                    login_form=None
+                    )
 
     # registra os blueprints
     app.register_blueprint(usuarios_bp)
@@ -33,6 +36,11 @@ def create_app(config_class=ConfigDev):
     # Cria todas as tabelas do banco de dados automaticamente
     with app.app_context():
         db.create_all()
+        
+        if not Role.query.filter_by(name='usuario').first():
+            usuario_role = Role(name='usuario', description='Usuário padrão')
+            db.session.add(usuario_role)
+        db.session.commit()
     
     @app.errorhandler(404)
     def page_not_found(e):
