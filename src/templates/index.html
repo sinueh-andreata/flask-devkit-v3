@@ -1,19 +1,22 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Flask App - Página Inicial</title>
+    <title>Página Inicial</title>
+    <link rel="icon" href="/static/favicon.ico" type="image/x-icon">
 </head>
 <body>
-    <h1>Bem-vindo ao Flask App</h1>
-    
-    <div>
-        <h2>Acesso</h2>
-        <p><a href="/register">Criar Conta</a></p>
-        <p><a href="/login">Fazer Login</a></p>
-    </div>
+    <h1>Bem-vindo</h1>
 
-    <script src="/static/js/csrf-handler.js"></script>
+    <!-- Botões para login e registro -->
+    <button onclick="window.location.href='/entrar'">Login</button>
+    <button onclick="window.location.href='/cadastrar'">Registrar</button>
+
+    <!-- Alternativa usando links -->
+    <!--
+    <a href="/login"><button>Login</button></a>
+    <a href="/register"><button>Registrar</button></a>
+    -->
 </body>
 </html>

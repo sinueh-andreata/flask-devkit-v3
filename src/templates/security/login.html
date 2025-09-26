@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Flask App</title>
+    <link rel="icon" href="/static/favicon.ico" type="image/x-icon">
+</head>
+<body>
+<h1>Loginaaa</h1>
+
+<form action="{{ url_for('security.login') }}" method="post">
+    {{ form.hidden_tag() }} <!-- CSRF e campos escondidos -->
+    <input type="text" name="email" placeholder="Email" value="{{ form.email.data }}">
+    <input type="password" name="password" placeholder="Password">
+    <button type="submit">Login</button>
+</form>
+</body>
+</html>
