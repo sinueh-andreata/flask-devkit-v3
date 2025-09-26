@@ -3,7 +3,6 @@ from .config import ConfigDev
 from .extensions import db, csrf, limiter, security
 from .models.models import User, Role
 from flask_security import SQLAlchemyUserDatastore
-from flask_security.forms import LoginForm, RegisterForm
 from flask_security.utils import verify_and_update_password
 from src.auth.datastore import user_datastore  
 from src.auth import init_app as init_auth
@@ -47,21 +46,5 @@ def create_app(config_class=ConfigDev):
     @app.route("/")
     def index():
         return render_template('index.html')
-    
-    @app.route('/entrar', methods=['GET', 'POST'])
-    def entrar():
-        form = LoginForm()
-        if form.validate_on_submit():
-
-            pass
-        return render_template('security/login.html', form=form)
-
-    @app.route('/cadastrar', methods=['GET', 'POST'])
-    def cadastrar():
-        form = RegisterForm()
-        if form.validate_on_submit():
-            # criar usuário manualmente ou usar user_datastore.create_user
-            pass
-        return render_template('security/register.html', form=form)
 
     return app
