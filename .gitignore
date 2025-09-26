@@ -3,6 +3,10 @@ __pycache__/
 *.py[cod]
 *$py.class
 
+#criar usuarios
+
+addmin.py
+
 # C extensions
 *.so
 
