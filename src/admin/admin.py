@@ -11,3 +11,4 @@ def minha_rota():
     if not current_user.has_role('admin'):
         return jsonify({"message": "Acesso negado: você não tem a role necessária"}), 403
     return jsonify({"message": "Apenas administradores autenticados veem isso"})
+
