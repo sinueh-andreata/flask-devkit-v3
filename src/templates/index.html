@@ -6,24 +6,8 @@
     <title>index</title>
 </head>
 <body>
-    <h1>registrar</h1>
+    <h1>registrar ou fazer login</h1>
 
-    <form action="/register" method="post">
-        <input type="text" name="email" placeholder="Email" required>
-        <input type="password" name="password" placeholder="Password" required>
-        <input type="hidden" name="csrf_token" id="csrf_token_register">
-        <button type="submit">Register</button>
-    </form>
-
-    <h1>login</h1>
-    <form id="login-form" action="/login" method="post">
-        <input type="text" name="email" placeholder="Email" required>
-        <input type="password" name="password" placeholder="Password" required>
-        <input type="hidden" name="csrf_token" id="csrf_token_login">
-        <button type="submit">Login</button>
-    </form>
-
-    <button action="/register">?</button>
 </body>
 <script src="/static/js/csrf.js"></script>
 </html>

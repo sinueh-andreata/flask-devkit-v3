@@ -26,17 +26,6 @@ class ConfigBase:
     SECURITY_SEND_REGISTER_EMAIL = False
     SECURITY_EMAIL_SENDER = False
     SECURITY_SEND_PASSWORD_CHANGE_EMAIL = False
-    
-    # URLs personalizadas
-    SECURITY_LOGIN_URL = '/login'
-    SECURITY_REGISTER_URL = '/register'
-    SECURITY_POST_LOGIN_REDIRECT_ENDPOINT = '/'
-    SECURITY_POST_REGISTER_REDIRECT_ENDPOINT = '/'
-    
-    # Templates personalizados
-    SECURITY_LOGIN_USER_TEMPLATE = 'security/login.html'
-    SECURITY_REGISTER_USER_TEMPLATE = 'security/register.html'
-
 
 # Configurações específicas para desenvolvimento 
 class ConfigDev(ConfigBase):

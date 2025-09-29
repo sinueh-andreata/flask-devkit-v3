@@ -1,6 +1,7 @@
-from src import create_app
+import os
+from app import app
 
-app = create_app()
+if __name__ == '__main__':
+    os.environ['FLASK_ENV'] = 'development'
 
-if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(host='localhost', port=5000, debug=True, use_reloader=True, use_debugger=True)

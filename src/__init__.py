@@ -12,9 +12,9 @@ from src.admin.admin import admins_bp
 
 
 def create_app(config_class=ConfigDev):
-    app = Flask(__name__)
-    app.config.from_object(config_class)
+    app = Flask(__name__, template_folder="templates")
 
+    app.config.from_object(config_class)
 
     # inicializa as extensoes do extensions.py
     db.init_app(app)
