@@ -16,7 +16,6 @@ def create_app(config_class=ConfigDev):
 
     app.config.from_object(config_class)
 
-
     # inicializa as extensoes do extensions.py
     db.init_app(app)
     csrf.init_app(app)
