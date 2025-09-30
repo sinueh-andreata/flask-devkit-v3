@@ -3,13 +3,13 @@ from flask import Blueprint, jsonify, request, redirect, url_for, render_templat
 from flask_security.decorators import roles_required, current_user
 from flask_security.forms import LoginForm, RegisterForm
 
-usuarios_bp = Blueprint('usuarios', __name__)
+users_bp = Blueprint('users', __name__)
 
-@usuarios_bp.route("/rtuser")
+@users_bp.route("/rtuser")
 @login_required
-@roles_required('usuario')
+@roles_required('user')
 def minha_rota():
-    if not current_user.has_role('usuario'):
+    if not current_user.has_role('user'):
         return jsonify({"message": "Acesso negado: você não tem a role necessária"}), 403
     return jsonify({"message": "Apenas usuários autenticados veem isso"})
 

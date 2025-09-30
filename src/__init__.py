@@ -6,7 +6,7 @@ from flask_security import SQLAlchemyUserDatastore
 from flask_security.utils import verify_and_update_password
 from src.auth.datastore import user_datastore  
 from src.auth import init_app as init_auth
-from src.usuario.usuarios import usuarios_bp
+from src.user.users import users_bp
 from .auth import auth
 from src.admin.admin import admins_bp
 
@@ -25,7 +25,7 @@ def create_app(config_class=ConfigDev):
     security.init_app(app, user_datastore)
 
     # registra os blueprints
-    app.register_blueprint(usuarios_bp)
+    app.register_blueprint(users_bp)
     app.register_blueprint(admins_bp)
 
     # inicializa o modulo de autenticação
