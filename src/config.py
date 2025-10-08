@@ -7,6 +7,7 @@ load_dotenv()
 class ConfigBase:
     SECRET_KEY = os.getenv('SECRET_KEY')
     SECURITY_PASSWORD_SALT = os.getenv('SECURITY_PASSWORD_SALT')
+    SECURITY_PASSWORD_HASH = "argon2"
 
     SQLALCHEMY_DATABASE_URI = (
         f"mysql+pymysql://{os.getenv('DB_USER')}:{os.getenv('DB_PASSWORD')}@"
@@ -20,13 +21,13 @@ class ConfigBase:
     SESSION_COOKIE_SECURE = True
     
     # Configurações do Flask-Security
+    SECURITY_TRACKABLE = False
     SECURITY_REGISTERABLE = True
     SECURITY_CONFIRMABLE = False
     SECURITY_RECOVERABLE = True
     SECURITY_SEND_REGISTER_EMAIL = False
     SECURITY_EMAIL_SENDER = False
     SECURITY_SEND_PASSWORD_CHANGE_EMAIL = False
-
     SECURITY_POST_LOGIN_VIEW = '/home'
 
 # Configurações específicas para desenvolvimento 
