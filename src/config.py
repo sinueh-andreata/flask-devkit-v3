@@ -27,6 +27,8 @@ class ConfigBase:
     SECURITY_EMAIL_SENDER = False
     SECURITY_SEND_PASSWORD_CHANGE_EMAIL = False
 
+    SECURITY_POST_LOGIN_VIEW = '/home'
+
 # Configurações específicas para desenvolvimento 
 class ConfigDev(ConfigBase):
     DEBUG = True
