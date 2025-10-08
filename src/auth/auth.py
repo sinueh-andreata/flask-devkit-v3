@@ -13,7 +13,7 @@ def csrf_token():
     return {'csrf_token': token}
 
 def on_user_registered(sender, user, **extra):
-    default_role = Role.query.filter_by(name="usuario").first()
+    default_role = Role.query.filter_by(name="user").first()
     if default_role:
         user.roles.append(default_role)
         db.session.commit()
