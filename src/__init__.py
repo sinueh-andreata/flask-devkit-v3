@@ -1,7 +1,7 @@
 from flask import Flask, app, render_template, redirect, url_for
 from .config import ConfigDev
 from .extensions import db, csrf, limiter, security
-from .models.models import User, Role
+from .models.models import User, Role, create_default_roles, create_default_users
 from flask_security import SQLAlchemyUserDatastore, LoginForm
 from flask_security.utils import verify_and_update_password
 from src.auth.datastore import user_datastore  
@@ -18,7 +18,6 @@ def create_app(config_class=ConfigDev):
     # inicializa as extensoes do extensions.py
     db.init_app(app)
     csrf.init_app(app)
-    # limiter.init_app(app)
 
     # configuração do Flask-Security
     security.init_app(app, user_datastore)
@@ -33,6 +32,8 @@ def create_app(config_class=ConfigDev):
     # Cria todas as tabelas do banco de dados automaticamente
     with app.app_context():
         db.create_all()
+        create_default_roles()
+        create_default_users()
 
     @app.errorhandler(404)
     def page_not_found(e):
@@ -49,8 +50,7 @@ def create_app(config_class=ConfigDev):
         # descomente essa linha caso nao seja necessario logar para acessar a pagina inicial
         # return render_template('index.html')
         
-
     @app.route("/home")
     def home():
-        return render_template('index.html')
+        return render_template('home.html')
     return app
