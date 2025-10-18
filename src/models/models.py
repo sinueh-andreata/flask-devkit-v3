@@ -28,6 +28,7 @@ class User(db.Model, UserMixin):
 
     roles = db.relationship('Role', secondary=roles_users, backref=db.backref('users', lazy='dynamic'))
 
+
 class Produto(db.Model):
     __tablename__ = 'produtos'
     id = db.Column(db.Integer, primary_key=True)
@@ -38,6 +39,14 @@ class Produto(db.Model):
 
     def __repr__(self):
         return f'<Produto {self.nome}>'
+    
+    def to_dict(self):
+        return {
+            'id': self.id,
+            'nome': self.nome,
+            'preco': self.preco,
+            'estoque': self.estoque
+        }
 
 def create_default_roles():
     default_roles = ['admin', 'user', 'root']

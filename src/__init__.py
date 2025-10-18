@@ -10,6 +10,7 @@ from src.user.users import users_bp
 from src.admin.admin import admins_bp
 from src.root.root import root_bp
 from .auth import auth
+from src.products.produtos import produtos_bp
 
 def create_app(config_class=ConfigDev):
     app = Flask(__name__, template_folder="templates")
@@ -27,6 +28,7 @@ def create_app(config_class=ConfigDev):
     app.register_blueprint(users_bp)
     app.register_blueprint(admins_bp)
     app.register_blueprint(root_bp)
+    app.register_blueprint(produtos_bp)
 
     # inicializa o modulo de autenticação
     auth.init_app(app)
