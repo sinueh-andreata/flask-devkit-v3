@@ -1,5 +1,6 @@
 from datetime import datetime
 import uuid
+from flask_security.utils import hash_password
 from flask_security import UserMixin, RoleMixin
 from ..extensions import db, Security
 from argon2 import PasswordHasher
@@ -54,7 +55,7 @@ def create_default_users():
         {
             # users
             'email': 'user@mail.com',
-            'password': 'user123',
+            'password': 'userpassword123',
             'active': True,
             'confirmed_at': datetime.utcnow(),
             'fs_uniquifier': str(uuid.uuid4()),
@@ -63,7 +64,7 @@ def create_default_users():
         {
             # admins
             'email': 'admin@mail.com',
-            'password': 'admin123',
+            'password': 'adminpassword123',
             'active': True,
             'confirmed_at': datetime.utcnow(),
             'fs_uniquifier': str(uuid.uuid4()),
@@ -72,7 +73,7 @@ def create_default_users():
         {
             # roots
             'email': 'root@mail.com',
-            'password': 'root123',
+            'password': 'rootpassword123',
             'active': True,
             'confirmed_at': datetime.utcnow(),
             'fs_uniquifier': str(uuid.uuid4()),
@@ -86,7 +87,7 @@ def create_default_users():
         if existing_user:
             continue
 
-        hashed_password = ph.hash(u['password'])
+        hashed_password = hash_password(u['password'])
 
         user = User(
             email=u['email'],

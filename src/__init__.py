@@ -7,8 +7,9 @@ from flask_security.utils import verify_and_update_password
 from src.auth.datastore import user_datastore  
 from src.auth import init_app as init_auth
 from src.user.users import users_bp
-from .auth import auth
 from src.admin.admin import admins_bp
+from src.root.root import root_bp
+from .auth import auth
 
 def create_app(config_class=ConfigDev):
     app = Flask(__name__, template_folder="templates")
@@ -25,6 +26,7 @@ def create_app(config_class=ConfigDev):
     # registra os blueprints
     app.register_blueprint(users_bp)
     app.register_blueprint(admins_bp)
+    app.register_blueprint(root_bp)
 
     # inicializa o modulo de autenticação
     auth.init_app(app)
