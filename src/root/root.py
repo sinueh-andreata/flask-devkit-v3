@@ -2,12 +2,13 @@ from flask_security import login_required
 from flask import Blueprint, jsonify, request, redirect, url_for
 from flask_security.decorators import roles_required, current_user
 
-admins_bp = Blueprint('admins', __name__)
+root_bp = Blueprint('root', __name__)
 
-@admins_bp.route("/rtadmin")
+@root_bp.route("/rtroot")
 @login_required
-@roles_required('admin')
+@roles_required('root')
 def minha_rota():
-    if not current_user.has_role('admin'):
+    if not current_user.has_role('root'):
         return jsonify({"message": "Acesso negado: você não tem a role necessária"}), 403
-    return jsonify({"message": "Apenas administradores autenticados veem isso"})
+    return jsonify({"message": "Apenas root autenticados veem isso"})
+
