@@ -2,8 +2,14 @@ from flask_security import login_required
 from flask import Blueprint, jsonify, request, redirect, url_for, render_template
 from flask_security.decorators import roles_required, current_user
 from ..models.models import Produto
+from ..extensions import db
+import re
 
 produtos_bp = Blueprint('produtos', __name__, url_prefix='/produtos')
+
+@produtos_bp.route('/')
+def pagina_produtos():
+    return render_template('produtos/produtos.html')
 
 def get_all_produtos():
     try:
