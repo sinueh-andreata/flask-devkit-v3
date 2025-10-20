@@ -20,6 +20,10 @@ class ConfigBase:
     SESSION_COOKIE_SAMESITE = 'Lax'
     SESSION_COOKIE_SECURE = True
     
+    # Configurações do CSRF
+    WTF_CSRF_TIME_LIMIT = 30
+    WTF_CSRF_SSL_STRICT = False
+    
     # Configurações do Flask-Security
     SECURITY_TRACKABLE = False
     SECURITY_REGISTERABLE = True
