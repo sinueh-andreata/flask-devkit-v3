@@ -9,9 +9,9 @@ function _getCsrfToken() {
 form.addEventListener('submit', async (event) => {
     event.preventDefault();
 
-    const nome = form.querySelector('#nome').value.trim();
-    const precoVal = form.querySelector('#preco').value;
-    const estoqueVal = form.querySelector('#estoque').value;
+    const nome = form.elements['nome'].value.trim();
+    const precoVal = form.elements['preco'].value;
+    const estoqueVal = form.elements['estoque'].value;
     const preco = Number(precoVal);
     const estoque = Number(estoqueVal);
 
