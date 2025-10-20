@@ -14,7 +14,7 @@ def pagina_produtos():
 
     return render_template('produtos/produtos.html')
 
-@produtos_bp.route('/all/Products', methods=['GET'])
+@produtos_bp.route('/all/products', methods=['GET'])
 def get_all_produtos():
     try:
         produtos = Produto.query.order_by(Produto.nome).all()
