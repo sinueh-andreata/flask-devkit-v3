@@ -23,7 +23,14 @@ async function fetchProdutos() {
         if (response.ok) {
             const produtos = await response.json();
             if (Array.isArray(produtos)) {
-                formProdutos.innerHTML = produtos.map(p => `\n                    <div class="produto">\n                        <h3>${p.nome}</h3>\n                        <p>Preço: ${p.preco}</p>\n                        <p>Estoque: ${p.estoque}</p>\n                    </div>\n                `).join('');
+                formProdutos.innerHTML = produtos.map(p => 
+                    `\n 
+                    <div class="produto">\n
+                    <h3>${p.nome}</h3>\n
+                    <p>Preço: ${p.preco}</p>\n
+                    <p>Estoque: ${p.estoque}</p>\n
+                    </div>\n
+                    `).join('');
             }
             return produtos;
         } else {
