@@ -21,6 +21,16 @@ def get_all_produtos():
         return jsonify([p.to_dict() for p in produtos]), 200
     except Exception as e:
         return jsonify({'error': str(e)}), 500
+    
+@produtos_bp.route('/produto/<int:produto_id>', methods=['GET'])
+def get_produto(produto_id):
+    try:
+        produto = Produto.query.get(produto_id)
+        if not produto:
+            return jsonify({'error': 'Produto não encontrado'}), 404
+        return jsonify(produto.to_dict()), 200
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
 
 @produtos_bp.route('/novo/produto', methods=['POST'])
 @login_required
