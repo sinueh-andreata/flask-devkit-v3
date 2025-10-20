@@ -96,3 +96,19 @@ def atualizar_produto(produto_id):
         db.session.rollback()
         return jsonify({'error': str(e)}), 500
     
+
+@produtos_bp.route('/deletar/produto/<int:produto_id>', methods=['DELETE'])
+@login_required
+@roles_required('admin')
+def deletar_produto(produto_id):
+    try:
+        produto = Produto.query.get(produto_id)
+        if not produto:
+            return jsonify({'error': 'Produto não encontrado'}), 404
+
+        db.session.delete(produto)
+        db.session.commit()
+        return jsonify({'message': 'Produto deletado com sucesso'}), 200
+    except Exception as e:
+        db.session.rollback()
+        return jsonify({'error': str(e)}), 500
