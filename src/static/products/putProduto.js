@@ -10,6 +10,7 @@ form.addEventListener('submit', async (event) => {
     event.preventDefault();
     console.log('submit!');
 
+    const produtoId = form.elements['produto_id'].value;
     const nome = form.querySelector('#nome').value.trim();
     const precoVal = form.querySelector('#preco').value;
     const estoqueVal = form.querySelector('#estoque').value;
@@ -25,7 +26,7 @@ form.addEventListener('submit', async (event) => {
     const csrfToken = _getCsrfToken();
 
     try {
-        const response = await fetch('/produtos/atualizar/produto', {
+        const response = await fetch(`/produtos/atualizar/produto/${produtoId}`, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',
