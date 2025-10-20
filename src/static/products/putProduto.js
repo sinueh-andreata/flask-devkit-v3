@@ -11,9 +11,9 @@ form.addEventListener('submit', async (event) => {
     console.log('submit!');
 
     const produtoId = form.elements['produto_id'].value;
-    const nome = form.querySelector('#nome').value.trim();
-    const precoVal = form.querySelector('#preco').value;
-    const estoqueVal = form.querySelector('#estoque').value;
+    const nome = form.elements['nome'].value.trim();
+    const precoVal = form.elements['preco'].value;
+    const estoqueVal = form.elements['estoque'].value;
     const preco = Number(precoVal);
     const estoque = Number(estoqueVal);
 
