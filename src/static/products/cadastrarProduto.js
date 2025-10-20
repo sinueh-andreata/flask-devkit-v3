@@ -2,7 +2,8 @@ const form = document.getElementById('formprodutos');
 const respostaDiv = document.getElementById('resposta');
 
 function _getCsrfToken() {
-    return (typeof getCsrfToken === 'function') ? getCsrfToken() : null;
+    const elById = document.getElementById('csrf_token');
+    if (elById && elById.value) return elById.value;
 }
 
 form.addEventListener('submit', async (event) => {
