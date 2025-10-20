@@ -57,3 +57,42 @@ def criar_produto():
     except Exception as e:
         db.session.rollback()
         return jsonify({'error': str(e)}), 500
+    
+@produtos_bp.route('/atualizar/produto/<int:produto_id>', methods=['PUT'])
+@login_required
+@roles_required('admin')
+def atualizar_produto(produto_id):
+    data = request.get_json(silent=True) or {}
+    nome = data.get('nome')
+    preco = data.get('preco')
+    estoque = data.get('estoque')
+
+    if nome and not re.match(r'^[a-zA-Z\s]*$', nome):
+        return jsonify({'error': 'Nome do produto inválido. Apenas letras e espaços são permitidos.'}), 400
+
+    try:
+        preco = float(preco)
+        estoque = int(estoque)
+    except (ValueError, TypeError):
+        return jsonify({'error': 'Preço deve ser número e estoque deve ser inteiro.'}), 400
+
+    if preco < 0:
+        return jsonify({'error': 'Preço não pode ser negativo.'}), 400
+
+    if estoque < 0:
+        return jsonify({'error': 'Estoque não pode ser negativo.'}), 400
+
+    try:
+        produto = Produto.query.get(produto_id)
+        if not produto:
+            return jsonify({'error': 'Produto não encontrado'}), 404
+
+        produto.nome = nome
+        produto.preco = preco
+        produto.estoque = estoque
+        db.session.commit()
+        return jsonify(produto.to_dict()), 200
+    except Exception as e:
+        db.session.rollback()
+        return jsonify({'error': str(e)}), 500
+    
