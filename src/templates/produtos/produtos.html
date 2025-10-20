@@ -16,8 +16,29 @@
         <button type="submit">Salvar</button>
     </form>
 
+    <form id="produtosForm">
+        
+    </form>
+
+    <form id="putProdutoForm">
+        <input type="hidden" id="csrf_token" name="csrf_token" value="{{ csrf_token() }}">
+        <input type="number" id="produto_id" name="produto_id" value="">
+        <input type="text" id="nome" placeholder="Nome do produto">
+        <input type="number" id="preco" placeholder="Preço">
+        <input type="number" id="estoque" placeholder="Estoque">
+        <button type="submit">Atualizar</button>
+    </form>
+
+    <form id="deleteProdutoForm">
+        <input type="hidden" id="csrf_token" name="csrf_token" value="{{ csrf_token() }}">
+        <input type="number" id="produto_id" name="produto_id" value="">
+        <button type="submit">Deletar</button>
+    </form>
     <div id="resposta"></div>
 </body>
     <script src="/static/js/csrf.js"></script>
+    <script src="/static/products/deleteProduto.js"></script>
+    <script src="/static/products/getProduto.js"></script>
+    <script src="/static/products/putProduto.js"></script>
     <script src="/static/products/cadastrarProduto.js"></script>
 </html>

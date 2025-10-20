@@ -8,3 +8,12 @@ fetch('/csrf-token')
         csrfInput.value = data.csrf_token;
         form.insertBefore(csrfInput, form.firstChild);
     });
+
+function getCsrfToken() {
+    const el = document.querySelector('input[name="csrf_token"]');
+    return el ? el.value : null;
+}
+
+if (typeof window !== 'undefined') {
+    window.getCsrfToken = getCsrfToken;
+}
