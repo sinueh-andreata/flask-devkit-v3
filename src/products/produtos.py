@@ -1,6 +1,6 @@
 from flask_security import login_required
 from flask import Blueprint, jsonify, request, redirect, url_for, render_template
-from flask_security.decorators import roles_required, current_user
+from flask_security.decorators import roles_required, roles_accepted, current_user
 from ..models.models import Produto
 from ..extensions import db
 import re
@@ -24,7 +24,7 @@ def get_all_produtos():
 
 @produtos_bp.route('/novo/produto', methods=['POST'])
 @login_required
-@roles_required('admin')
+@roles_accepted('admin', 'root')
 def criar_produto():
     data = request.get_json(silent=True) or {}
     nome = data.get('nome')
