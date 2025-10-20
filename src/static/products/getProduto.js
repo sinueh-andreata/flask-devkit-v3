@@ -1,44 +1,43 @@
-const formProdutos = document.getElementById('produtosForm');
-
 document.addEventListener('DOMContentLoaded', () => {
-    if (!formProdutos) {
-        console.warn('getProduto: #produtosForm not found in DOM');
-        return;
-    }
-    fetchProdutos().then(() => console.log('getProduto: fetch finished'));
-});
+    const formProdutos = document.getElementById('produtosForm');
 
-async function fetchProdutos() {
-    const csrfToken = _getCsrfToken();
-    try {
-        const response = await fetch('/produtos/all/products', {
-            method: 'GET',
-            headers: {
-                'Content-Type': 'application/json',
-                'X-CSRFToken': csrfToken || '',
-                'X-CSRF-Token': csrfToken || ''
-            },
-            credentials: 'same-origin'
-        });
-        if (response.ok) {
-            const produtos = await response.json();
-            if (Array.isArray(produtos)) {
-                formProdutos.innerHTML = produtos.map(p => 
-                    `\n 
-                    <div class="produto">\n
-                    <h3>${p.nome}</h3>\n
-                    <p>Preço: ${p.preco}</p>\n
-                    <p>Estoque: ${p.estoque}</p>\n
-                    </div>\n
-                    `).join('');
+    function _getCsrfToken() {
+        if (typeof getCsrfToken === 'function') return getCsrfToken();
+    }
+
+    async function fetchProdutos() {
+        const csrfToken = _getCsrfToken();
+        try {
+            const response = await fetch('/produtos/all/products', {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRFToken': csrfToken || '',
+                    'X-CSRF-Token': csrfToken || ''
+                },
+                credentials: 'same-origin'
+            });
+            if (response.ok) {
+                const produtos = await response.json();
+                if (Array.isArray(produtos) && formProdutos) {
+                    formProdutos.innerHTML = produtos.map(p => 
+                        `<div class="produto">
+                            <h3>${p.nome}</h3>
+                            <p>Preço: ${p.preco}</p>
+                            <p>Estoque: ${p.estoque}</p>
+                        </div>`
+                    ).join('');
+                }
+                return produtos;
+            } else {
+                console.error('Erro ao buscar produtos:', response.statusText);
+                return [];
             }
-            return produtos;
-        } else {
-            console.error('Erro ao buscar produtos:', response.statusText);
+        } catch (error) {
+            console.error('Erro na requisição:', error);
             return [];
         }
-    } catch (error) {
-        console.error('Erro na requisição:', error);
-        return [];
     }
-}
+
+    fetchProdutos().then(() => console.log('getProduto: fetch finished'));
+});
