@@ -1,5 +1,6 @@
-const form = document.getElementById('formprodutos');
-const respostaDiv = document.getElementById('resposta');
+document.addEventListener('DOMContentLoaded', () => {
+    const form = document.getElementById('formprodutos');
+    const respostaDiv = document.getElementById('resposta');
 
 function _getCsrfToken() {
     if (typeof getCsrfToken === 'function') return getCsrfToken();
@@ -8,16 +9,18 @@ function _getCsrfToken() {
 form.addEventListener('submit', async (event) => {
     event.preventDefault();
 
-    const nome = document.getElementById('nome').value.trim();
-    const precoVal = document.getElementById('preco').value;
-    const estoqueVal = document.getElementById('estoque').value;
+    const nome = form.querySelector('#nome').value.trim();
+    const precoVal = form.querySelector('#preco').value;
+    const estoqueVal = form.querySelector('#estoque').value;
+    const preco = Number(precoVal);
+    const estoque = Number(estoqueVal);
 
-    if (!nome || precoVal === '' || estoqueVal === '') {
-        respostaDiv.innerHTML = `<p>Preencha nome, preço e estoque.</p>`;
+    if (!nome || precoVal === '' || estoqueVal === '' || isNaN(preco) || isNaN(estoque)) {
+        respostaDiv.innerHTML = `<p>Preencha nome, preço e estoque corretamente.</p>`;
         return;
     }
 
-    const produto = { nome, preco: precoVal, estoque: estoqueVal };
+    const produto = { nome, preco, estoque };
     const csrfToken = _getCsrfToken();
 
     try {
@@ -50,4 +53,5 @@ form.addEventListener('submit', async (event) => {
     } catch (error) {
         respostaDiv.innerHTML = `<p>Erro na requisição: ${error.message}</p>`;
     }
+    });
 });
