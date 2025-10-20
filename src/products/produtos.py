@@ -9,9 +9,7 @@ produtos_bp = Blueprint('produtos', __name__, url_prefix='/produtos')
 
 @produtos_bp.route('/')
 def pagina_produtos():
-
     all_products = get_all_produtos()
-
     return render_template('produtos/produtos.html')
 
 @produtos_bp.route('/all/products', methods=['GET'])
@@ -36,6 +34,9 @@ def get_produto(produto_id):
 @login_required
 @roles_accepted('admin', 'root')
 def criar_produto():
+    if not current_user.has_role('admin') and not current_user.has_role('root'):
+        return jsonify({"message": "Acesso negado: você não tem a role necessária"}), 403
+
     data = request.get_json(silent=True) or {}
     nome = data.get('nome')
     preco = data.get('preco')
@@ -70,8 +71,11 @@ def criar_produto():
     
 @produtos_bp.route('/atualizar/produto/<int:produto_id>', methods=['PUT'])
 @login_required
-@roles_required('admin')
+@roles_accepted('admin', 'root')
 def atualizar_produto(produto_id):
+    if not current_user.has_role('admin') and not current_user.has_role('root'):
+        return jsonify({"message": "Acesso negado: você não tem a role necessária"}), 403
+
     data = request.get_json(silent=True) or {}
     nome = data.get('nome')
     preco = data.get('preco')
@@ -109,8 +113,11 @@ def atualizar_produto(produto_id):
 
 @produtos_bp.route('/deletar/produto/<int:produto_id>', methods=['DELETE'])
 @login_required
-@roles_required('admin')
+@roles_accepted('admin', 'root')
 def deletar_produto(produto_id):
+    if not current_user.has_role('admin') and not current_user.has_role('root'):
+        return jsonify({"message": "Acesso negado: você não tem a role necessária"}), 403
+
     try:
         produto = Produto.query.get(produto_id)
         if not produto:

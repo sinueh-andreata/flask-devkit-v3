@@ -1,0 +1,16 @@
+# selecionando a imagem base (nesse caso é python)
+FROM python:3.13
+# definindo o diretório de trabalho dentro do container
+WORKDIR /src
+
+# copiando o arquivo de dependências para dentro do container
+COPY requirements.txt .
+# instalando as dependências
+RUN pip install --no-cache-dir -r requirements.txt
+
+# copiando o código fonte para dentro do container
+COPY . .
+
+EXPOSE 5555
+
+CMD ["gunicorn", "--bind", "0.0.0.0:5555", "run:app", "loglevel=debug", "--reload"]

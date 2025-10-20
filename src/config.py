@@ -21,7 +21,7 @@ class ConfigBase:
     SESSION_COOKIE_SECURE = True
     
     # Configurações do CSRF
-    WTF_CSRF_TIME_LIMIT = 30
+    WTF_CSRF_TIME_LIMIT = 3600
     WTF_CSRF_SSL_STRICT = False
     
     # Configurações do Flask-Security

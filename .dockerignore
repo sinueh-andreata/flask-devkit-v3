@@ -1,0 +1,17 @@
+.git/
+.venv/
+env/
+venv/
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.pytest_cache/
+.vscode/
+.idea/
+*.log
+tmp/
+dist/
+build/
+*.egg-info/
+flask_devkit-v3/
