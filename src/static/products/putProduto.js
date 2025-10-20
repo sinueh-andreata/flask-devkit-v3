@@ -10,13 +10,14 @@ form.addEventListener('submit', async (event) => {
     event.preventDefault();
     console.log('submit!');
 
-    const produtoId = form.elements['produto_id'].value;
+    const produtoIdVal = form.elements['produto_id'].value;
     const nome = form.elements['nome'].value.trim();
     const precoVal = form.elements['preco'].value;
     const estoqueVal = form.elements['estoque'].value;
     const preco = Number(precoVal);
     const estoque = Number(estoqueVal);
-
+    const produto_id = Number(produtoIdVal);
+    
     if (!nome || precoVal === '' || estoqueVal === '' || isNaN(preco) || isNaN(estoque)) {
         respostaDiv.innerHTML = `<p>Preencha nome, preço e estoque corretamente.</p>`;
         return;
@@ -26,7 +27,7 @@ form.addEventListener('submit', async (event) => {
     const csrfToken = _getCsrfToken();
 
     try {
-        const response = await fetch(`/produtos/atualizar/produto/${produtoId}`, {
+        const response = await fetch(`/produtos/atualizar/produto/${produto_id}`, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',
