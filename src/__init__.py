@@ -6,11 +6,15 @@ from flask_security import SQLAlchemyUserDatastore, LoginForm
 from flask_security.utils import verify_and_update_password
 from src.auth.datastore import user_datastore  
 from src.auth import init_app as init_auth
-from src.user.users import users_bp
-from src.admin.admin import admins_bp
-from src.root.root import root_bp
+from src.routes.users import users_bp as users_bp
+from src.api.users import users_bp as users_api_bp
+from src.routes.admin import admin_bp as admin_bp
+from src.api.admin import admin_bp as admin_api_bp
+from src.routes.root import root_bp as root_bp
+from src.api.root import root_bp as root_api_bp
+
+
 from .auth import auth
-from src.products.produtos import produtos_bp
 
 def create_app(config_class=ConfigDev):
     app = Flask(__name__, template_folder="templates")
@@ -26,10 +30,11 @@ def create_app(config_class=ConfigDev):
 
     # registra os blueprints
     app.register_blueprint(users_bp)
-    app.register_blueprint(admins_bp)
+    app.register_blueprint(users_api_bp)
+    app.register_blueprint(admin_bp)
+    app.register_blueprint(admin_api_bp)
     app.register_blueprint(root_bp)
-    app.register_blueprint(produtos_bp)
-
+    app.register_blueprint(root_api_bp)
     # inicializa o modulo de autenticação
     auth.init_app(app)
 
@@ -38,14 +43,6 @@ def create_app(config_class=ConfigDev):
         db.create_all()
         create_default_roles()
         create_default_users()
-
-    @app.errorhandler(404)
-    def page_not_found(e):
-        return render_template('404.html'), 404
-
-    @app.errorhandler(500)
-    def internal_server_error(e):
-        return render_template('500.html'), 500
 
     @app.route("/")
     def index():
