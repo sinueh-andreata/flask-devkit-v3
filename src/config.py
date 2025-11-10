@@ -33,6 +33,10 @@ class ConfigBase:
     SECURITY_EMAIL_SENDER = False
     SECURITY_SEND_PASSWORD_CHANGE_EMAIL = False
     SECURITY_POST_LOGIN_VIEW = '/home'
+    # Templates customizados do Flask-Security
+    SECURITY_FORGOT_PASSWORD_TEMPLATE = 'security/reset_password.html'
+    SECURITY_LOGIN_USER_TEMPLATE = 'security/login_user.html'
+    SECURITY_REGISTER_USER_TEMPLATE = 'security/register_user.html'
 
 # Configurações específicas para desenvolvimento 
 class ConfigDev(ConfigBase):
