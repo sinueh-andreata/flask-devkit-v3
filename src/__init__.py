@@ -12,7 +12,8 @@ from src.routes.admin import admin_bp as admin_bp
 from src.api.admin import admin_bp as admin_api_bp
 from src.routes.root import root_bp as root_bp
 from src.api.root import root_bp as root_api_bp
-
+from src.api.products import products_bp as products_api_bp
+from src.routes.products import products_bp as products_bp
 
 from .auth import auth
 
@@ -33,6 +34,8 @@ def create_app(config_class=ConfigDev):
     app.register_blueprint(users_api_bp)
     app.register_blueprint(admin_bp)
     app.register_blueprint(admin_api_bp)
+    app.register_blueprint(products_bp)
+    app.register_blueprint(products_api_bp)
     app.register_blueprint(root_bp)
     app.register_blueprint(root_api_bp)
     # inicializa o modulo de autenticação
