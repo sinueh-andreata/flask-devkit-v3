@@ -11,7 +11,7 @@ config_class = ConfigProd if os.getenv('FLASK_ENV') == 'production' else ConfigD
 app = create_app(config_class)
 
 if __name__ == '__main__':
-    port = int(os.getenv('PORT', 5777 if os.getenv('FLASK_ENV') == 'production' else 5555))
+    port = int(os.getenv('PORT', 5000))
     debug = config_class.DEBUG
     
     app.run(host='0.0.0.0', port=port, debug=debug)
